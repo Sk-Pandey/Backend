@@ -1,8 +1,9 @@
 const http = require("http");
 
 const server = http.createServer((req, res) => {
-  console.log("Hi");
-  process.exit();
+  console.log("URL", req.url);
+  console.log("Method", req.method);
+  console.log("header", req.headers);
 });
 const PORT = 3000;
 server.listen(PORT, () => {
