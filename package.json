@@ -17,5 +17,8 @@
     "url": "https://github.com/Sk-Pandey/Backend/issues"
   },
   "homepage": "https://github.com/Sk-Pandey/Backend#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "prettier": "^3.9.5"
+  }
 }
