@@ -1,2 +1,6 @@
 let greet = require("./greet");
-greet("Shashikant");
+
+let names = require("./peoples");
+names.forEach((name) => {
+  greet(name);
+});
