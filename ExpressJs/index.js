@@ -21,12 +21,7 @@ app.get("/", (req, res) => {
       </ol>
     </div>`);
 });
-app.get("/:username", (req, res) => {
-  const { username } = req.params;
-  res.send(
-    `Hi am ${username}! <br> <a href="http://localhost:3000/"> << Go Back to Home</a>`,
-  );
-});
+
 app.get("/about", (req, res) => {
   res.send(
     `HI am on About <br> <a href="http://localhost:3000/"> << Go Back to Home</a>`,
@@ -42,8 +37,19 @@ app.get("/service", (req, res) => {
     `HI am on Service <br> <a href="http://localhost:3000/"> << Go Back to Home</a>`,
   );
 });
+app.get("/search", (req, res) => {
+  const { q } = req.query;
+  res.send(
+    `You had Search for ${q} <br> <a href="http://localhost:3000/"> << Go Back to Home</a>`,
+  );
+});
+app.get("/:username", (req, res) => {
+  const { username } = req.params;
+  res.send(
+    `Hi am ${username}! <br> <a href="http://localhost:3000/"> << Go Back to Home</a>`,
+  );
+});
 
 app.listen(PORT, () => {
   console.log("App is listening on PORT: ", PORT);
 });
- 
