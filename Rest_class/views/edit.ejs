@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Post</title>
+    <link rel="stylesheet" href="/output.css" />
+  </head>
+  <body>
+    <div class="flex justify-center items-center h-screen">
+      <form
+        action="/posts/<%= post.id %>?_method=PATCH"
+        method="post"
+        class="bg-slate-700 flex p-10 rounded-lg"
+      >
+        <div class="flex flex-col justify-between gap-10">
+          <h1 class="text-white text-3xl text-center font-bold">
+            Editing Post of <%= post.username%>
+          </h1>
+          <textarea
+            class="border-white border text-white w-full p-4 rounded-lg"
+            name="content"
+          >
+<%= post.content%></textarea
+          >
+          <button
+            class="border-white border text-white w-full bg-teal-700 py-4 px-6 rounded-lg font-bold"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

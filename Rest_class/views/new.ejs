@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Post</title>
+    <link href="/output.css" rel="stylesheet" />
+  </head>
+  <body class="flex justify-center items-center h-screen">
+    <form
+      method="post"
+      action="/posts"
+      class="bg-slate-700 flex p-10 rounded-lg"
+    >
+      <div class="flex flex-col justify-between gap-10 items-center">
+        <input
+          class="border-white border text-white w-full p-4 rounded-lg"
+          type="text"
+          name="username"
+          placeholder="Enter You username"
+        />
+        <textarea
+          class="border-white border text-white w-full p-4 rounded-lg"
+          name="content"
+          placeholder="Write you post"
+        ></textarea>
+        <button
+          class="border-white border text-white w-full bg-teal-700 py-4 px-6 rounded-lg text-white font-bold"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </body>
+</html>

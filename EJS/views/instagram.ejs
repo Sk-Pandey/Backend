@@ -1,0 +1,48 @@
+<%- include("includes/header.ejs") %>
+  <body>
+    <h1 style="color: tomato; font-variant: small-caps; text-align: center">
+      Instagram
+    </h1>
+
+    <div>
+      <div style="display: flex;flex-direction:column; ">
+
+        <div style="display: flex; gap: 30px; align-items: center;justify-content: center;">
+          <div style="text-align: center">
+            <h2><%= data.name.toUpperCase() %></h2>
+          </div>
+
+          <div style="text-align: center">
+            <span>
+              <%= data.followers %>
+              <br />
+              followers
+            </span>
+          </div>
+
+          <div style="text-align: center">
+            <span>
+              <%= data.following %>
+              <br />
+              following
+            </span>
+          </div>
+        </div>
+
+        <!-- Post -->
+         <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+          <% data.posts.forEach(post => { %>
+        <div>
+          <img style=" border-radius: 20px;border: 2px solid black;" src="<%= post.image %>" />
+          <div style="display: flex; justify-content: space-around; margin: 5px;">
+            <span>Likes <b><%= post.likes%></b></span>
+            <span>Comments <b><%= post.comments%></b></span>
+          </div>
+        </div>
+         <% }); %>
+         </div> 
+      </div>
+    </div>
+    <%- include("includes/footer.ejs") %>
+  </body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Posts</title>
+
+
+<link rel="stylesheet" href="/output.css">
+
+
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+
+<!-- Header -->
+<div class="flex justify-between items-center px-6 py-5 md:px-10 bg-white shadow-sm">
+
+    <h1 class="text-2xl md:text-3xl font-bold font-serif text-gray-800">
+        Tweet With Freedom
+    </h1>
+
+    <a href="/posts/new">
+        <button
+            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg transition duration-200 shadow-md">
+            Create New Post
+        </button>
+    </a>
+
+</div>
+
+
+<!-- Posts Container -->
+<div class="flex flex-wrap gap-5 p-6 md:p-10 justify-between">
+
+    <% posts.forEach(element => { %>
+
+        <!-- Post Card -->
+        <div
+            class=" flex  flex-col justify-between w-full sm:w-[300px] bg-slate-700 text-white p-5 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition duration-200">
+
+            <h2 class="text-center text-lg font-bold text-blue-300 mb-3">
+                @<%= element.username %>
+            </h2>
+
+            <p class="text-center text-gray-100 leading-relaxed">
+                <%= element.content %>
+            </p>
+            
+            <div class=" flex pt-4 justify-between" >
+                <a href="/posts/<%=element.id%>">
+        <button
+            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg transition duration-200 shadow-md">
+            View In Detail
+        </button>
+    </a>
+            <a href="/posts/<%=element.id%>/edit">
+        <button
+            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg transition duration-200 shadow-md">
+            Edit
+        </button>
+    </a>
+            </div>
+            
+        </div>
+
+    <% }) %>
+
+</div>
+
+
+</body>
+
+</html>
