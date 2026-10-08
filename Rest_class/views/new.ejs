@@ -3,33 +3,111 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>New Post</title>
+    <title>Create New Post - Tweet With Freedom</title>
     <link href="/output.css" rel="stylesheet" />
   </head>
-  <body class="flex justify-center items-center h-screen">
-    <form
-      method="post"
-      action="/posts"
-      class="bg-slate-700 flex p-10 rounded-lg"
+  <body
+    class="bg-slate-950 text-slate-100 min-h-screen flex items-center justify-center p-4 selection:bg-indigo-500 selection:text-white"
+  >
+    <!-- Ambient background glow -->
+    <div
+      class="fixed inset-0 pointer-events-none -z-10 flex items-center justify-center"
     >
-      <div class="flex flex-col justify-between gap-10 items-center">
-        <input
-          class="border-white border text-white w-full p-4 rounded-lg"
-          type="text"
-          name="username"
-          placeholder="Enter You username"
-        />
-        <textarea
-          class="border-white border text-white w-full p-4 rounded-lg"
-          name="content"
-          placeholder="Write you post"
-        ></textarea>
-        <button
-          class="border-white border text-white w-full bg-teal-700 py-4 px-6 rounded-lg text-white font-bold"
+      <div class="w-96 h-96 bg-indigo-600/15 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="w-full max-w-lg">
+      <!-- Top Back Link -->
+      <a
+        href="/posts"
+        class="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white mb-6 transition-colors"
+      >
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
         >
-          Submit
-        </button>
-      </div>
-    </form>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+          />
+        </svg>
+        Back to all posts
+      </a>
+
+      <!-- Card Form -->
+      <form
+        method="post"
+        action="/posts"
+        class="bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-8 backdrop-blur-xl"
+      >
+        <div class="mb-6">
+          <h2 class="text-2xl font-extrabold text-white tracking-tight">
+            Create a New Post
+          </h2>
+          <p class="text-slate-400 text-sm mt-1">
+            Share an update, idea, or thought with the world.
+          </p>
+        </div>
+
+        <div class="space-y-5">
+          <div>
+            <label
+              class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2"
+              >Username</label
+            >
+            <div class="relative">
+              <span
+                class="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-500 font-mono text-sm"
+                >@</span
+              >
+              <input
+                class="w-full bg-slate-950/70 border border-slate-800 text-slate-100 text-sm pl-9 pr-4 py-3.5 rounded-xl placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                type="text"
+                name="username"
+                placeholder="yourusername"
+                required
+              />
+            </div>
+          </div>
+
+          <div>
+            <label
+              class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2"
+              >Post Content</label
+            >
+            <textarea
+              class="w-full bg-slate-950/70 border border-slate-800 text-slate-100 text-sm p-4 rounded-xl placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all min-h-[140px] resize-y leading-relaxed"
+              name="content"
+              placeholder="What's on your mind today?"
+              required
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full py-3.5 px-6 rounded-xl bg-indigo-600 hover:bg-indigo-500 active:scale-[0.99] text-white font-semibold text-sm transition-all duration-200 shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-2"
+          >
+            <span>Publish Post</span>
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
+              />
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
   </body>
 </html>

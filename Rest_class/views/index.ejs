@@ -1,77 +1,110 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>All Posts</title>
-
-
-<link rel="stylesheet" href="/output.css">
-
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tweet With Freedom - All Posts</title>
+  <link rel="stylesheet" href="/output.css" />
 </head>
+<body class="bg-slate-950 text-slate-100 min-h-screen selection:bg-indigo-500 selection:text-white antialiased">
 
-<body class="bg-gray-100 min-h-screen">
-
-
-<!-- Header -->
-<div class="flex justify-between items-center px-6 py-5 md:px-10 bg-white shadow-sm">
-
-    <h1 class="text-2xl md:text-3xl font-bold font-serif text-gray-800">
-        Tweet With Freedom
-    </h1>
-
-    <a href="/posts/new">
-        <button
-            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg transition duration-200 shadow-md">
-            Create New Post
-        </button>
-    </a>
-
-</div>
-
-
-<!-- Posts Container -->
-<div class="flex flex-wrap gap-5 p-6 md:p-10 justify-between">
-
-    <% posts.forEach(element => { %>
-
-        <!-- Post Card -->
-        <div
-            class=" flex  flex-col justify-between w-full sm:w-[300px] bg-slate-700 text-white p-5 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition duration-200">
-
-            <h2 class="text-center text-lg font-bold text-blue-300 mb-3">
-                @<%= element.username %>
-            </h2>
-
-            <p class="text-center text-gray-100 leading-relaxed">
-                <%= element.content %>
-            </p>
-            
-            <div class=" flex pt-4 justify-between" >
-                <a href="/posts/<%=element.id%>">
-        <button
-            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg transition duration-200 shadow-md">
-            View In Detail
-        </button>
-    </a>
-            <a href="/posts/<%=element.id%>/edit">
-        <button
-            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg transition duration-200 shadow-md">
-            Edit
-        </button>
-    </a>
-            </div>
-            
+  <!-- Sticky Glassmorphism Header -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 border-b border-slate-800/80 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-sky-400 flex items-center justify-center shadow-lg shadow-indigo-500/20 text-white font-black text-xl">
+          ✦
         </div>
+        <div>
+          <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+            Tweet With Freedom
+          </h1>
+          <p class="text-xs text-slate-400 hidden sm:block">Speak your mind without boundaries</p>
+        </div>
+      </div>
 
-    <% }) %>
+      <a href="/posts/new" class="group relative inline-flex items-center justify-center p-0.5 overflow-hidden rounded-xl font-medium transition duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40">
+        <span class="w-full h-full bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 group-hover:from-indigo-600 group-hover:to-pink-600 absolute"></span>
+        <span class="relative px-5 py-2.5 transition-all ease-out bg-slate-900 rounded-[10px] group-hover:bg-opacity-0 text-sm font-semibold flex items-center gap-2">
+          <svg class="w-4 h-4 text-indigo-400 group-hover:text-white transition-colors" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+          Create Post
+        </span>
+      </a>
+    </div>
+  </header>
 
-</div>
+  <!-- Main Feed Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <% if (posts.length === 0) { %>
+      <div class="text-center py-24 bg-slate-900/40 border border-dashed border-slate-800 rounded-3xl p-8">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-slate-800 flex items-center justify-center text-slate-400 text-2xl font-bold">
+          ✍️
+        </div>
+        <h3 class="text-lg font-semibold text-slate-200">No posts yet</h3>
+        <p class="text-sm text-slate-400 mt-1 max-w-sm mx-auto">Be the first voice to share your thoughts on the feed.</p>
+        <a href="/posts/new" class="mt-5 inline-block text-sm font-semibold text-indigo-400 hover:text-indigo-300">
+          Create a post now &rarr;
+        </a>
+      </div>
+    <% } %>
 
+    <!-- Posts Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <% posts.forEach(element => { %>
+        <article class="flex flex-col justify-between rounded-2xl bg-slate-900/90 border border-slate-800/90 p-6 shadow-xl hover:shadow-2xl hover:border-slate-700 hover:-translate-y-1.5 transition-all duration-300 group">
+          
+          <div>
+            <!-- Author Header -->
+            <div class="flex items-center gap-3.5 mb-4">
+              <div class="h-10 w-10 rounded-full bg-gradient-to-tr from-indigo-600 to-sky-400 flex items-center justify-center text-sm font-bold uppercase ring-2 ring-slate-800 text-white shadow-inner">
+                <%= element.username ? element.username.charAt(0) : 'U' %>
+              </div>
+              <div class="overflow-hidden">
+                <span class="block text-sm font-bold text-slate-100 truncate group-hover:text-indigo-400 transition-colors">
+                  <%= element.username %>
+                </span>
+                <span class="block text-xs font-mono text-slate-400 truncate">
+                  @<%= element.username %>
+                </span>
+              </div>
+            </div>
+
+            <!-- Content -->
+            <p class="text-slate-300 text-sm leading-relaxed whitespace-pre-line break-words line-clamp-5">
+              <%= element.content %>
+            </p>
+          </div>
+
+          <!-- Action Buttons / Footer -->
+          <div class="pt-6 mt-6 border-t border-slate-800/80 flex flex-col gap-2.5">
+            <div class="grid grid-cols-2 gap-2">
+              <a href="/posts/<%= element.id %>" class="w-full">
+                <button type="button" class="w-full py-2 px-3 text-xs font-semibold rounded-lg bg-slate-800 text-slate-200 hover:bg-slate-700 hover:text-white transition-colors duration-150 border border-slate-700/60 flex items-center justify-center gap-1.5">
+                  <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                  Details
+                </button>
+              </a>
+
+              <a href="/posts/<%= element.id %>/edit" class="w-full">
+                <button type="button" class="w-full py-2 px-3 text-xs font-semibold rounded-lg bg-indigo-500/10 text-indigo-300 hover:bg-indigo-500 hover:text-white transition-all duration-150 border border-indigo-500/20 flex items-center justify-center gap-1.5">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"/></svg>
+                  Edit
+                </button>
+              </a>
+            </div>
+
+            <form action="/posts/<%= element.id %>?_method=DELETE" method="post" class="w-full">
+              <button type="submit" class="w-full py-2 px-3 text-xs font-semibold rounded-lg text-rose-400 bg-rose-500/10 hover:bg-rose-500 hover:text-white border border-rose-500/20 transition-all duration-150 flex items-center justify-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg>
+                Delete
+              </button>
+            </form>
+          </div>
+
+        </article>
+      <% }) %>
+    </div>
+  </main>
 
 </body>
-
 </html>
