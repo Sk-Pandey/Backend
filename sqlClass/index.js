@@ -24,6 +24,7 @@ let getRandomUser = () => {
   ];
 };
 
+// Home route
 app.get("/", (req, res) => {
   let q = `Select count(*) from user`;
   try {
@@ -31,6 +32,34 @@ app.get("/", (req, res) => {
       if (err) throw err;
       let count = result[0]["count(*)"];
       res.render("home.ejs", { count });
+    });
+  } catch {
+    console.log(err);
+    res.send("Some errpor in db");
+  }
+});
+
+app.get("/user", (req, res) => {
+  let q = `Select id,username,email from user`;
+  try {
+    connection.query(q, (err, result) => {
+      if (err) throw err;
+      let users = result;
+      res.render("users.ejs", { users });
+    });
+  } catch {
+    console.log(err);
+    res.send("Some errpor in db");
+  }
+});
+app.get("/user/:id/edit", (req, res) => {
+  let { id } = req.params;
+  let q = `Select username from user where id='${id}'`;
+  try {
+    connection.query(q, (err, result) => {
+      if (err) throw err;
+      let user = result[0];
+      res.render("edit.ejs", { user });
     });
   } catch {
     console.log(err);

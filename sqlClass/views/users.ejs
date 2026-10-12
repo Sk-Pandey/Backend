@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Users</title>
+  </head>
+  <body style="display: flex; justify-content: center; flex-direction: column;">
+    <h1 style="text-align: center;">Total Users Are <%= users.length %></h1>
+    <table border="1" style="text-align: center;">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Edit User</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% users.forEach(user => { %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.username %></td>
+          <td><%= user.email %></td>
+          <td>
+            <form action="/user/<%=user.id%>/edit" method="get">
+              <button>Edit Username</button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+        
+
+        
+      </tbody>
+    </table>
+  </body>
+</html>
