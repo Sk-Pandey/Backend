@@ -4,36 +4,109 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Users</title>
+    <link rel="stylesheet" href="/output.css" />
   </head>
-  <body style="display: flex; justify-content: center; flex-direction: column;">
-    <h1 style="text-align: center;">Total Users Are <%= users.length %></h1>
-    <table border="1" style="text-align: center;">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Edit User</th>
-        </tr>
-      </thead>
+  <body class="bg-gray-50 text-gray-800 min-h-screen p-4 sm:p-6 lg:p-8">
+    <div class="max-w-5xl mx-auto">
+      
+      <!-- Header Section -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">User Management</h1>
+          <p class="text-sm text-gray-500 mt-1">
+            Total Users: <span class="font-semibold text-indigo-600"><%= users.length %></span>
+          </p>
+        </div>
+        
+        <button 
+          type="button" 
+          class="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg shadow-sm transition duration-150 cursor-pointer"
+        >
+          Add New User
+        </button>
+      </div>
 
-      <tbody>
+      <!-- Mobile View: Cards (Visible only on mobile screen < 640px) -->
+      <div class="block sm:hidden space-y-3">
         <% users.forEach(user => { %>
-        <tr>
-          <td><%= user.id %></td>
-          <td><%= user.username %></td>
-          <td><%= user.email %></td>
-          <td>
-            <form action="/user/<%=user.id%>/edit" method="get">
-              <button>Edit Username</button>
-            </form>
-          </td>
-        </tr>
-        <% }) %>
-        
+          <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex flex-col gap-3">
+            <div>
+              <p class="font-semibold text-gray-900 text-base break-words"><%= user.username %></p>
+              <p class="text-sm text-gray-500 break-all mt-0.5"><%= user.email %></p>
+            </div>
+            
+            <!-- Button Group: Equal 50/50 flex split -->
+            <div class="flex items-center gap-2 pt-2 border-t border-gray-100">
+              <form action="/user/<%= user.id %>/edit" method="GET" class="flex-1">
+                <button 
+                  type="submit" 
+                  class="w-full py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-semibold rounded-md border border-blue-200 transition duration-150 cursor-pointer text-center"
+                >
+                  Edit
+                </button>
+              </form>
 
-        
-      </tbody>
-    </table>
+              <form action="/user/<%= user.id %>/delete" method="GET" class="flex-1">
+                <button 
+                  type="submit" 
+                  class="w-full py-2 px-3 bg-red-50 hover:bg-red-100 text-red-700 text-xs font-semibold rounded-md border border-red-200 transition duration-150 cursor-pointer text-center"
+                >
+                  Delete
+                </button>
+              </form>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+
+      <!-- Desktop View: Table (Hidden on mobile, visible on sm and up) -->
+      <div class="hidden sm:block bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead class="bg-gray-100 text-gray-600 uppercase text-xs tracking-wider">
+              <tr>
+                <th scope="col" class="py-3.5 px-6">Name</th>
+                <th scope="col" class="py-3.5 px-6">Email</th>
+                <th scope="col" class="py-3.5 px-6 text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 text-sm">
+              <% users.forEach(user => { %>
+              <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-4 px-6 text-gray-700 font-medium">
+                  <%= user.username %>
+                </td>
+                <td class="py-4 px-6 text-gray-500 break-all">
+                  <%= user.email %>
+                </td>
+                <td class="py-4 px-6 text-center whitespace-nowrap">
+                  <div class="inline-flex items-center gap-2">
+                    <form action="/user/<%= user.id %>/edit" method="GET" class="inline">
+                      <button 
+                        type="submit" 
+                        class="px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-semibold rounded-md border border-blue-200 transition duration-150 cursor-pointer"
+                      >
+                        Edit
+                      </button>
+                    </form>
+
+                    <form action="/user/<%= user.id %>/delete" method="GET" class="inline">
+                      <button 
+                        type="submit" 
+                        class="px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-700 text-xs font-semibold rounded-md border border-red-200 transition duration-150 cursor-pointer"
+                      >
+                        Delete
+                      </button>
+                    </form>
+                  </div>
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
   </body>
 </html>

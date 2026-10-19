@@ -3,16 +3,73 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Edit</title>
+    <title>Edit User</title>
+    <link rel="stylesheet" href="/output.css" />
   </head>
-  <body>
-    <h1>You are editing</h1>
-    <form>
-      <input type="text" value="<%= user.username %>" /> <br />
-      <br />
-      <input type="password" placeholder=" Enter password" /> <br />
-      <br />
-      <button>Change Username</button>
-    </form>
+  <body class="bg-gray-50 text-gray-800 min-h-screen flex items-center justify-center p-4 sm:p-6">
+    <div class="w-full max-w-md bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8">
+      
+      <!-- Header -->
+      <div class="mb-6 text-center">
+        <h1 class="text-xl sm:text-2xl font-bold text-gray-900">
+          Edit User
+        </h1>
+        <p class="text-sm text-gray-500 mt-1">
+          You are editing 
+          <span class="font-medium text-rose-500 break-all"><%= user.email %></span>
+        </p>
+      </div>
+
+      <!-- Form -->
+      <form method="POST" action="/user/<%= user.id %>?_method=PATCH" class="space-y-5">
+        
+        <!-- Username Field -->
+        <div>
+          <label for="username" class="block text-sm font-medium text-gray-700 mb-1.5">
+            Username
+          </label>
+          <textarea
+            id="username"
+            name="username"
+            rows="3"
+            class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 resize-none shadow-sm"
+            required
+          ><%= user.username %></textarea>
+        </div>
+
+        <!-- Password Field -->
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700 mb-1.5">
+            Confirm Password
+          </label>
+          <input
+            id="password"
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm"
+            required
+          />
+        </div>
+
+        <!-- Buttons Container -->
+        <div class="pt-2 flex flex-col sm:flex-row gap-3">
+          <button
+            type="submit"
+            class="w-full sm:flex-1 py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg shadow-sm transition duration-150 ease-in-out cursor-pointer text-center"
+          >
+            Change Username
+          </button>
+          
+          <a
+            href="/"
+            class="w-full sm:w-auto py-2.5 px-4 bg-white hover:bg-gray-100 text-gray-700 text-sm font-medium rounded-lg border border-gray-300 shadow-sm transition duration-150 text-center cursor-pointer"
+          >
+            Cancel
+          </a>
+        </div>
+      </form>
+
+    </div>
   </body>
 </html>
