@@ -17,13 +17,15 @@
             Total Users: <span class="font-semibold text-indigo-600"><%= users.length %></span>
           </p>
         </div>
-        
-        <button 
-          type="button" 
+        <form action="/user/new" method="get">
+          <button 
+          type="submit" 
           class="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg shadow-sm transition duration-150 cursor-pointer"
         >
           Add New User
         </button>
+        </form>
+        
       </div>
 
       <!-- Mobile View: Cards (Visible only on mobile screen < 640px) -->

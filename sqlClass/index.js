@@ -86,6 +86,27 @@ app.get("/user", (req, res) => {
   }
 });
 
+// create new user
+
+app.get("/user/new", (req, res) => {
+  res.render("new.ejs");
+});
+
+app.post("/user/new", (req, res) => {
+  let { username, email, password } = req.body;
+  let id = faker.string.uuid();
+  let q = `INSERT INTO user values(
+  ?,?,?,?
+  )`;
+  connection.query(q, [id, username, email, password], (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).render("error.ejs");
+    }
+    res.redirect("/user");
+  });
+});
+
 // --- Edit Route: Displays edit form for a specific user ---
 // Retrieves a single user record by ID from route parameters and renders edit.ejs
 app.get("/user/:id/edit", (req, res) => {
@@ -100,7 +121,7 @@ app.get("/user/:id/edit", (req, res) => {
     });
   } catch {
     console.log(err);
-    res.send("Some errpor in db");
+    res.render("error.ejs");
   }
 });
 
@@ -133,13 +154,13 @@ WHERE id = '${id}';`;
           });
         } catch {
           console.log(err);
-          res.send("Some error in db");
+          res.render("error.ejs");
         }
       }
     });
   } catch {
     console.log(err);
-    res.send("Some error in db");
+    res.render("error.ejs");
   }
 });
 
@@ -157,7 +178,7 @@ app.get("/user/:id/delete", (req, res) => {
     });
   } catch {
     console.log(err);
-    res.send("Some error in db");
+    res.render("error.ejs");
   }
 });
 
@@ -182,13 +203,13 @@ WHERE id = '${id}';`;
           });
         } catch {
           console.log(err);
-          res.send("Some error in db");
+          res.render("error.ejs");
         }
       }
     });
   } catch {
     console.log(err);
-    res.send("Some error in db");
+    res.render("error.ejs");
   }
 });
 
